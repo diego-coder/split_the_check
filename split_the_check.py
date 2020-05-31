@@ -21,7 +21,7 @@ def convert_rating_to_tip_percentage(service_rating):
     elif (rating_of_service == 3):
         tip_percentage = 0.09
     elif (rating_of_service == 4):
-        tip_percentage = 0.02
+        tip_percentage = 0.12
     elif (rating_of_service == 5):
         tip_percentage = 0.15
     elif (rating_of_service == 6):
@@ -46,8 +46,17 @@ def caculate_total_bill_with_tax_and_tip_for_each(total_for_everything):
     return total_bill_per_person
 
 def calculate_total_bill_with_tax_and_tip_for_all():
-    total_bill_for_everyone = (calculate_bill_with_tax_for_each() * number_of_payers) + (calculate_amount_of_tip_to_pay_for_each() * number_of_payers)
+    tax_total = base_restaurant_bill * sales_tax
+    total_bill_with_tax = base_restaurant_bill + tax_total
+    tip_total = base_restaurant_bill * convert_rating_to_tip_percentage(rating_of_service)
+    total_bill_for_everyone = total_bill_with_tax + tip_total
     return total_bill_for_everyone
+
+# def calculate_total_bill_with_tax_and_tip_for_all():
+#     total_bill_for_everyone = (calculate_bill_with_tax_for_each() * number_of_payers) + (calculate_amount_of_tip_to_pay_for_each() * number_of_payers)
+#     print("oldcalc " + str(total_bill_for_everyone))
+#     return total_bill_for_everyone
+
 
 print("Total bill per person with tax: $" + str(calculate_bill_with_tax_for_each()) + ".")
 print("Tip per person: $" + str(round(calculate_amount_of_tip_to_pay_for_each(),2)) + ".")
